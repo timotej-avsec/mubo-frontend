@@ -1,5 +1,6 @@
 const isProd = process.env.NODE_ENV === 'production';
 const analyticsModule = isProd ?  ['@nuxtjs/google-analytics', {id: 'G-FP9XG73J1L'}] : null;
+const analyticsGtagModule = isProd ?  ['@nuxtjs/google-gtag', {id: 'G-FP9XG73J1L'}] : null;
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -58,7 +59,8 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
 
-    ...(analyticsModule ? [analyticsModule] : [])
+    ...(analyticsModule ? [analyticsModule] : []),
+    ...(analyticsGtagModule ? [analyticsGtagModule] : []),
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
