@@ -1,7 +1,13 @@
 <template>
   <div class="w-100 mb-5">
     <form
-      class="search-form d-flex justify-content-center"
+      class="
+        search-form
+        d-flex
+        justify-content-center
+        align-items-center
+        flex-column
+      "
       @submit.prevent="shortenUrl"
     >
       <div class="search_box">
@@ -10,12 +16,19 @@
           placeholder="Which URL would you like to shorten?"
           v-model="url"
         />
-        <i class="fas fa-search"></i>
-        <div class="new-url mt-3 p-2">
-          <span>
-            Shortened link: <bold><a :href="shortenedUrl">{{ shortenedUrl }}</a></bold>
-          </span>
+        <i class="fas fa-link" @click="shortenUrl"></i>
+      </div>
+      <div class="new-url mt-3 p-2">
+        <div class="w-100 d-flex justify-content-center" v-if="isLoading">
+        <b-spinner label="Loading"></b-spinner>
         </div>
+
+        <span v-else>
+          Shortened link:
+          <bold
+            ><a :href="shortenedUrl">{{ shortenedUrl }}</a></bold
+          >
+        </span>
       </div>
     </form>
   </div>
@@ -27,14 +40,20 @@ export default {
     return {
       url: '',
       shortenedUrl: '',
+      isLoading: false,
     }
   },
   methods: {
     async shortenUrl() {
-      const response = await this.$axios.post('https://mubo.one/create-url', {
-        url: this.url,
-      })
-      this.shortenedUrl = 'https://mubo.one/' + response.data.code
+      this.isLoading = true
+      try {
+        const response = await this.$axios.post('https://mubo.one/create-url', {
+          url: this.url,
+        })
+        this.shortenedUrl = 'https://mubo.one/' + response.data.code
+      } finally {
+        this.isLoading = false
+      }
     },
   },
 }
@@ -63,6 +82,10 @@ export default {
   position: relative;
 }
 
+.new-url {
+  width: 50%;
+}
+
 .search_box input[type='text'] {
   width: 100%;
   padding: 20px;
@@ -76,13 +99,14 @@ export default {
   outline: none;
 }
 
-.fa-search {
+.fa-link {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   right: 25px;
   color: #fff;
   font-size: 25px;
+  cursor: pointer;
 }
 
 ::-webkit-input-placeholder {
@@ -99,14 +123,15 @@ export default {
 }
 
 @media screen and (max-width: 425px) {
-  .search_box {
+  .search_box,
+  .new-url {
     width: 95%;
   }
 }
 
-.new-url{
+.new-url {
   color: white;
-  background-color: rgba(0, 0, 0, 0.6);;
+  background-color: rgba(0, 0, 0, 0.6);
   border-radius: 10px;
 }
 </style>

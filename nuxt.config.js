@@ -28,6 +28,10 @@ export default {
         src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
         'data-ad-client': 'ca-pub-8292319396340722',
         async: true
+      },
+      {
+        src: 'https://kit.fontawesome.com/3e00ba041f.js',
+        crossorigin: "anonymous"
       }
     ]
   },
@@ -53,6 +57,7 @@ export default {
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+
     ...(analyticsModule ? [analyticsModule] : [])
   ],
 
