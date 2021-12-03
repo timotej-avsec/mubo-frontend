@@ -1,5 +1,6 @@
 <template>
-  <div class="">
+  <div class="d-flex justify-content-center align-items-center pb-5" 
+      style="height: 100vh; z-index: 1">
     <div
       class="
         container
@@ -7,11 +8,7 @@
         flex-column
         justify-content-start
         align-items-center
-        p-0
-        pt-5
-        mt-5
       "
-      style="height: 100vh; z-index: 1"
     >
       <h1 class="logo mt-5">Mubo - URL shortener</h1>
       <search-input />

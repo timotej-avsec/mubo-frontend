@@ -1,3 +1,6 @@
+const isProd = process.env.NODE_ENV === 'production';
+const analyticsModule = isProd ?  ['@nuxtjs/google-analytics', {id: 'G-FP9XG73J1L'}] : null;
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -50,6 +53,7 @@ export default {
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    ...(analyticsModule ? [analyticsModule] : [])
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -57,5 +61,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  googleAnalytics: {
+    id: 'G-FP9XG73J1L'
   }
 }
