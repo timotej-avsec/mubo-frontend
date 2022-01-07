@@ -25,8 +25,8 @@
 
         <span v-else>
           Shortened link:
-          <bold
-            ><a :href="shortenedUrl">{{ shortenedUrl }}</a></bold
+          <b
+            ><a :href="shortenedUrl">{{ shortenedUrl }}</a></b
           >
         </span>
       </div>
@@ -51,7 +51,11 @@ export default {
           url: this.url,
         })
         this.shortenedUrl = 'https://mubo.one/' + response.data.code
-      } finally {
+      } 
+      catch(error){
+        this.$toast.error('Error shortening URL: ' + error.response.data.errors[0])
+      }
+      finally {
         this.isLoading = false
       }
     },

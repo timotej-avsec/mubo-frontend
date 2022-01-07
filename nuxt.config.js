@@ -61,6 +61,7 @@ export default {
 
     ...(analyticsModule ? [analyticsModule] : []),
     ...(analyticsGtagModule ? [analyticsGtagModule] : []),
+    '@nuxtjs/toast',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
