@@ -53,7 +53,9 @@ export default {
         this.shortenedUrl = 'https://mubo.one/' + response.data.code
       } 
       catch(error){
-        this.$toast.error('Error shortening URL: ' + error.response.data.errors[0])
+        this.$toast.error(error.response.data.errors[0], {
+          duration: 1500
+        })
       }
       finally {
         this.isLoading = false
